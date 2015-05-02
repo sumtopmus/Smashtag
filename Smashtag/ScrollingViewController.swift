@@ -70,9 +70,9 @@ class ScrollingViewController: UIViewController, UIScrollViewDelegate {
         scrollView.maximumZoomScale = max(Defaults.maxScale, scrollView.zoomScale)
     }
 
-    @IBAction func toggleNavigationBar(sender: UITapGestureRecognizer) {
+    @IBAction func toggleNavigationBar(gesture: UITapGestureRecognizer) {
         let hidden = navigationController!.navigationBar.hidden
-        navigationController!.setNavigationBarHidden(!hidden, animated: true)
+//        navigationController!.setNavigationBarHidden(!hidden, animated: true)
     }
 
     override func prefersStatusBarHidden() -> Bool {

@@ -19,12 +19,19 @@ class HistoryTableViewController: UITableViewController {
     }
 
     private var queryHistory = [String]()
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
         let defaults = NSUserDefaults.standardUserDefaults()
         queryHistory = defaults.objectForKey(Keys.queryHistory) as? [String] ?? []
+        tableView.reloadData()
+    }
+
+    func updateQueryHistoryModel() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(Keys.queryHistory)
+        defaults.setObject(queryHistory, forKey: Keys.queryHistory)
     }
 
     // MARK: - Table view data source
@@ -43,6 +50,22 @@ class HistoryTableViewController: UITableViewController {
         cell.textLabel?.text = queryHistory[indexPath.row]
 
         return cell
+    }
+
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return UITableViewCellEditingStyle.Delete
+    }
+
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            queryHistory.removeAtIndex(indexPath.row)
+            updateQueryHistoryModel()
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        }
     }
 
     // MARK: - Navigation

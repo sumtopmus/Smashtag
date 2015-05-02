@@ -155,19 +155,3 @@ class TweetsTableViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func goBackAndSearch(segue: UIStoryboardSegue) {
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

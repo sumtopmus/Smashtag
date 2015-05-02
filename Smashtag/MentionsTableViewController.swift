@@ -18,6 +18,7 @@ class MentionsTableViewController: UITableViewController {
     }
 
     private class Mentions {
+        static let userSymbol = "@"
         static let title = ["Images", "Hashtags", "URLs", "User Mentions"]
 
         var data = [[ItemToMention]](count: 4, repeatedValue: [ItemToMention]())
@@ -26,7 +27,7 @@ class MentionsTableViewController: UITableViewController {
             data[0] = tweet.media.map { .Image($0) }
             data[1] = tweet.hashtags.map { .Hashtag($0.keyword) }
             data[2] = tweet.urls.map { .URL($0.keyword) }
-            data[3] = tweet.userMentions.map { .UserMention($0.keyword) }
+            data[3] = [.UserMention(Mentions.userSymbol + tweet.user.screenName)] + tweet.userMentions.map { .UserMention($0.keyword) }
         }
 
         func getMediaItem(indexPath: NSIndexPath) -> MediaItem? {
@@ -50,6 +51,11 @@ class MentionsTableViewController: UITableViewController {
                 return nil
             }
         }
+    }
+
+    private struct TwitterOperators {
+        static let or = " OR "
+        static let postedBy = "from:"
     }
 
     private var mentions: Mentions?
@@ -84,6 +90,9 @@ class MentionsTableViewController: UITableViewController {
             let dequeuedCell = tableView.dequeueReusableCellWithIdentifier("cellWithImage", forIndexPath: indexPath) as! MediaTableViewCell
             dequeuedCell.mediaItem = mentions?.getMediaItem(indexPath)
             cell = dequeuedCell
+        case 2:
+            cell = tableView.dequeueReusableCellWithIdentifier("cellWithURL", forIndexPath: indexPath) as! UITableViewCell
+            cell.textLabel?.text = mentions?.getString(indexPath)
         default:
             cell = tableView.dequeueReusableCellWithIdentifier("cellWithText", forIndexPath: indexPath) as! UITableViewCell
                 cell.textLabel?.text = mentions?.getString(indexPath)
@@ -117,13 +126,23 @@ class MentionsTableViewController: UITableViewController {
                 if let imageScrollViewController = destination as? ScrollingViewController, selectedCell = tableView.cellForRowAtIndexPath(indexPath) as? MediaTableViewCell {
                     imageScrollViewController.image = selectedCell.imageViewInCell?.image
                 }
-            case 1, 3:
+            case 1:
                 if let tweetsTableViewController = destination as? TweetsTableViewController {
                     tweetsTableViewController.searchText = mentions?.getString(indexPath)
                 }
             case 2:
                 if let url = NSURL(string: mentions!.getString(indexPath)!) {
-                    UIApplication.sharedApplication().openURL(url)
+//                    UIApplication.sharedApplication().openURL(url)
+                    if let webViewController = destination as? WebViewController {
+                        webViewController.url = url
+                    }
+                }
+            case 3:
+                if let tweetsTableViewController = destination as? TweetsTableViewController {
+                    let user: String = mentions!.getString(indexPath)!
+                    let userNoSymbol: String = user.substringFromIndex(user.startIndex.successor())
+                    let searchQuery = user + TwitterOperators.or + TwitterOperators.postedBy + userNoSymbol
+                    tweetsTableViewController.searchText = searchQuery
                 }
             default:
                 break
