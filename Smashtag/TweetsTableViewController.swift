@@ -15,7 +15,9 @@ class TweetsTableViewController: UITableViewController, UITextFieldDelegate {
     }
 
     private struct Defaults {
+        static let tweetsFetchingCount = 100
         static let searchText = "#kharkiv"
+        static let rowHeight: CGFloat = 80
     }
 
     var tweets = [[Tweet]]()
@@ -27,24 +29,21 @@ class TweetsTableViewController: UITableViewController, UITextFieldDelegate {
             tweets.removeAll()
             tableView.reloadData()
             updateTweets()
+            updateHistory()
         }
     }
 
-    var tweetsFetchingCount = 100
+    // MARK: - Initialization
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.estimatedRowHeight = tableView.rowHeight
+//        tabBarController?.
+
+        tableView.estimatedRowHeight = Defaults.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
 
         updateTweets()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     // MARK: - Update tweets list
@@ -53,6 +52,22 @@ class TweetsTableViewController: UITableViewController, UITextFieldDelegate {
         didSet {
             searchTextField.delegate = self
             searchTextField.text = searchText
+        }
+    }
+
+    private func updateHistory() {
+        if let newQuery = searchText {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            var queryHistory = defaults.objectForKey(Keys.queryHistory) as? [String] ?? []
+            defaults.removeObjectForKey(Keys.queryHistory)
+            if queryHistory.filter({ $0 == newQuery }).count > 0 {
+                queryHistory = queryHistory.filter { $0 != newQuery }
+            }
+            if queryHistory.count >= Keys.maxHistorySize {
+                queryHistory.removeRange(Keys.maxHistorySize-1...queryHistory.count-1)
+            }
+            queryHistory.insert(newQuery, atIndex: 0)
+            defaults.setObject(queryHistory, forKey: Keys.queryHistory)
         }
     }
 
@@ -88,7 +103,7 @@ class TweetsTableViewController: UITableViewController, UITextFieldDelegate {
         let result: TwitterRequest?
         if lastSuccessfullRequest == nil {
             if let searchTextUnwrapped = searchText {
-                result = TwitterRequest(search: searchTextUnwrapped, count: tweetsFetchingCount)
+                result = TwitterRequest(search: searchTextUnwrapped, count: Defaults.tweetsFetchingCount)
             } else {
                 result = nil
             }
@@ -123,49 +138,36 @@ class TweetsTableViewController: UITableViewController, UITextFieldDelegate {
         return cell
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        var destination = segue.destinationViewController as? UIViewController
+        if let navVC = destination as? UINavigationController {
+            destination = navVC.visibleViewController
+        }
+        if let mentionsViewController = destination as? MentionsTableViewController {
+            if let indexPath = self.tableView.indexPathForSelectedRow() {
+                mentionsViewController.tweet = tweets[indexPath.section][indexPath.row]
+            }
+        }
     }
-    */
 
+    @IBAction func goBackAndSearch(segue: UIStoryboardSegue) {
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

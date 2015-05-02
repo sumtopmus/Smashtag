@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A8099541AF4404200619223 /* ScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8099531AF4404200619223 /* ScrollingViewController.swift */; };
 		2A83B0E71AF078FE00C00F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83B0E61AF078FE00C00F94 /* AppDelegate.swift */; };
 		2A83B0EC1AF078FE00C00F94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A83B0EA1AF078FE00C00F94 /* Main.storyboard */; };
 		2A83B0EE1AF078FE00C00F94 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A83B0ED1AF078FE00C00F94 /* Images.xcassets */; };
@@ -18,6 +19,11 @@
 		2A83B10D1AF079D000C00F94 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83B1091AF079D000C00F94 /* User.swift */; };
 		2A83B1131AF0828700C00F94 /* TweetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83B1121AF0828700C00F94 /* TweetsTableViewController.swift */; };
 		2A83B1151AF083CA00C00F94 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A83B1141AF083CA00C00F94 /* TweetTableViewCell.swift */; };
+		2AFF68741AF1A0E10062355D /* MentionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFF68731AF1A0E10062355D /* MentionsTableViewController.swift */; };
+		2AFF68761AF1AA420062355D /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFF68751AF1AA420062355D /* MediaTableViewCell.swift */; };
+		2AFF687A1AF2D8C70062355D /* ImageScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFF68791AF2D8C70062355D /* ImageScrollViewController.swift */; };
+		2AFF687E1AF328770062355D /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFF687D1AF328770062355D /* HistoryTableViewController.swift */; };
+		2AFF68801AF32FB40062355D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFF687F1AF32FB40062355D /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A8099531AF4404200619223 /* ScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingViewController.swift; sourceTree = "<group>"; };
 		2A83B0E11AF078FE00C00F94 /* Smashtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smashtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A83B0E51AF078FE00C00F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A83B0E61AF078FE00C00F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +53,11 @@
 		2A83B1091AF079D000C00F94 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Twitter/User.swift; sourceTree = "<group>"; };
 		2A83B1121AF0828700C00F94 /* TweetsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsTableViewController.swift; sourceTree = "<group>"; };
 		2A83B1141AF083CA00C00F94 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		2AFF68731AF1A0E10062355D /* MentionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsTableViewController.swift; sourceTree = "<group>"; };
+		2AFF68751AF1AA420062355D /* MediaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
+		2AFF68791AF2D8C70062355D /* ImageScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageScrollViewController.swift; sourceTree = "<group>"; };
+		2AFF687D1AF328770062355D /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		2AFF687F1AF32FB40062355D /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,8 +99,14 @@
 		2A83B0E31AF078FE00C00F94 /* Smashtag */ = {
 			isa = PBXGroup;
 			children = (
-				2A83B1141AF083CA00C00F94 /* TweetTableViewCell.swift */,
+				2AFF687F1AF32FB40062355D /* Common.swift */,
+				2AFF687D1AF328770062355D /* HistoryTableViewController.swift */,
 				2A83B1121AF0828700C00F94 /* TweetsTableViewController.swift */,
+				2AFF68731AF1A0E10062355D /* MentionsTableViewController.swift */,
+				2AFF68791AF2D8C70062355D /* ImageScrollViewController.swift */,
+				2A8099531AF4404200619223 /* ScrollingViewController.swift */,
+				2A83B1141AF083CA00C00F94 /* TweetTableViewCell.swift */,
+				2AFF68751AF1AA420062355D /* MediaTableViewCell.swift */,
 				2A83B0EA1AF078FE00C00F94 /* Main.storyboard */,
 				2A83B10F1AF079E000C00F94 /* TwitterAccess */,
 				2A83B0E41AF078FE00C00F94 /* Supporting Files */,
@@ -235,13 +253,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AFF68741AF1A0E10062355D /* MentionsTableViewController.swift in Sources */,
+				2AFF687A1AF2D8C70062355D /* ImageScrollViewController.swift in Sources */,
 				2A83B1131AF0828700C00F94 /* TweetsTableViewController.swift in Sources */,
 				2A83B1151AF083CA00C00F94 /* TweetTableViewCell.swift in Sources */,
+				2AFF68801AF32FB40062355D /* Common.swift in Sources */,
 				2A83B10C1AF079D000C00F94 /* TwitterRequest.swift in Sources */,
+				2AFF68761AF1AA420062355D /* MediaTableViewCell.swift in Sources */,
 				2A83B10D1AF079D000C00F94 /* User.swift in Sources */,
 				2A83B0E71AF078FE00C00F94 /* AppDelegate.swift in Sources */,
+				2AFF687E1AF328770062355D /* HistoryTableViewController.swift in Sources */,
 				2A83B10A1AF079D000C00F94 /* MediaItem.swift in Sources */,
 				2A83B10B1AF079D000C00F94 /* Tweet.swift in Sources */,
+				2A8099541AF4404200619223 /* ScrollingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +463,7 @@
 				2A83B1021AF078FE00C00F94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2A83B1031AF078FE00C00F94 /* Build configuration list for PBXNativeTarget "SmashtagTests" */ = {
 			isa = XCConfigurationList;
@@ -447,6 +472,7 @@
 				2A83B1051AF078FE00C00F94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
